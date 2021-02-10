@@ -59,10 +59,10 @@ And your `renderPage` template:
 func renderPage(context: PageRenderingContext<EmptyMetadata, SiteMetadata>) -> Node {
   html(lang: "en-US") {
     body {
-	    div(id: "page") {
-	      h1 { context.page.title }
-	      context.page.body
-	    }
+      div(id: "page") {
+        h1 { context.page.title }
+        context.page.body
+      }
     }
   }
 }
