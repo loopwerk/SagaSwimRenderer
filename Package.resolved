@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "HTML",
+        "repositoryURL": "https://github.com/robb/Swim",
+        "state": {
+          "branch": null,
+          "revision": "a17c57dbd3148889b667604cc084417b13f9788f",
+          "version": "0.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
