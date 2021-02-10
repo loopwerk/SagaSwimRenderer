@@ -1,4 +1,4 @@
-# SagaSwimWriter
+# SagaSwimRenderer
 
 A renderer for [Saga](https://github.com/loopwerk/Saga) that uses [Swim](https://github.com/robb/Swim) to turn a RenderingContext into a String.
 
@@ -18,11 +18,9 @@ import PackageDescription
 
 let package = Package(
   name: "Example",
-  platforms: [
-    .macOS(.v10_15)
-  ],
   dependencies: [
     .package(url: "https://github.com/loopwerk/Saga", from: "0.14.0"),
+    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "0.2.0"),
     .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "0.1.0")
   ],
   targets: [
@@ -30,6 +28,7 @@ let package = Package(
       name: "Example",
       dependencies: [
         "Saga",
+        "SagaParsleyMarkdownReader",
         "SagaSwimRenderer"
       ]
     ),
@@ -41,12 +40,13 @@ main.swift:
 
 ``` swift
 import Saga
+import SagaParsleyMarkdownReader
 import SagaSwimRenderer
 
 try Saga(input: "content", output: "deploy", siteMetadata: EmptyMetadata())
   .register(
     metadata: EmptyMetadata.self,
-    readers: [.markdownReader()],
+    readers: [.parsleyMarkdownReader()],
     writers: [
       .pageWriter(swim(renderPage))
     ]
