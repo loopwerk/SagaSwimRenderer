@@ -1,8 +1,8 @@
 import HTML
 
-public func swim<Context>(_ templateFunction: @escaping (Context) -> Node) -> ((Context) -> String) {
+public func swim<Context>(_ templateFunction: @escaping (Context) -> NodeConvertible) -> ((Context) -> String) {
   return { context in
     let node = templateFunction(context)
-    return node.toString()
+    return node.asNode().toString()
   }
 }
