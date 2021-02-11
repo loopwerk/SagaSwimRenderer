@@ -22,7 +22,7 @@ public struct AtomFeed {
     self.summary = summary
   }
 
-  func node() -> Node {
+  public func node() -> Node {
     feed(xmlns: "http://www.w3.org/2005/Atom") {
       author {
         name {
