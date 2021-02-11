@@ -43,7 +43,7 @@ public struct AtomFeed {
       pages.map { page in
         entry {
           title {
-            page.title.addingXMLEncoding()
+            page.title.escapedXMLCharacters
           }
           id {
             baseURL.appendingPathComponent(page.url).absoluteString
@@ -55,7 +55,7 @@ public struct AtomFeed {
 
           if let summaryString = self.summary?(page) {
             summary {
-              summaryString.addingXMLEncoding()
+              summaryString.escapedXMLCharacters
             }
           }
 
@@ -113,19 +113,5 @@ public extension AtomFeed {
 
   func content(type: String = "text", @NodeBuilder children: () -> NodeConvertible) -> Node {
     .element("content", [ "type": type ], children().asNode())
-  }
-}
-
-public extension String {
-  func addingXMLEncoding() -> String {
-    withCFString { string -> NSString in
-      CFXMLCreateStringByEscapingEntities(nil, string, nil)
-    } as String
-  }
-
-  private func withCFString<Result>(_ body: (CFString) throws -> Result) rethrows -> Result {
-    try withCString { cString in
-      try body(CFStringCreateWithCString(nil, cString, CFStringBuiltInEncodings.UTF8.rawValue))
-    }
   }
 }
