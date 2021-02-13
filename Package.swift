@@ -13,7 +13,7 @@ let package = Package(
       targets: ["SagaSwimRenderer"]),
   ],
   dependencies: [
-    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.14.0"),
+    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.18.0"),
     .package(name: "HTML", url: "https://github.com/robb/Swim", from: "0.1.1"),
   ],
   targets: [

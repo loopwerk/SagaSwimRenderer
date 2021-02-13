@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Codextended",
-        "repositoryURL": "https://github.com/johnsundell/codextended.git",
+        "repositoryURL": "https://github.com/JohnSundell/Codextended.git",
         "state": {
           "branch": null,
           "revision": "8d7c46dfc9c55240870cf5561d6cefa41e3d7105",
@@ -24,17 +24,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "bfec86a98a6534fd5e5207cd08daf65cb6036b95",
-          "version": "0.14.0"
-        }
-      },
-      {
-        "package": "Slugify",
-        "repositoryURL": "https://github.com/nodes-vapor/slugify",
-        "state": {
-          "branch": null,
-          "revision": "2231b5cff8e08693e4036a03b7220e93340fcae0",
-          "version": "2.0.0"
+          "revision": "4198041c682fb64db2f47d6f1240d5394fa12667",
+          "version": "0.18.0"
         }
       },
       {

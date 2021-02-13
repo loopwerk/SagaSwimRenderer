@@ -48,20 +48,20 @@ try Saga(input: "content", output: "deploy", siteMetadata: EmptyMetadata())
     metadata: EmptyMetadata.self,
     readers: [.parsleyMarkdownReader()],
     writers: [
-      .pageWriter(swim(renderPage))
+      .itemWriter(swim(renderItem))
     ]
   )
 ```
 
-And your `renderPage` template:
+And your `renderItem` template:
 
 ``` swift
-func renderPage(context: PageRenderingContext<EmptyMetadata, SiteMetadata>) -> Node {
+func renderItem(context: ItemRenderingContext<EmptyMetadata, SiteMetadata>) -> Node {
   html(lang: "en-US") {
     body {
-      div(id: "page") {
-        h1 { context.page.title }
-        context.page.body
+      div(id: "item") {
+        h1 { context.item.title }
+        context.item.body
       }
     }
   }

@@ -6,19 +6,19 @@ public struct AtomFeed {
   let dateFormatter = ISO8601DateFormatter()
   let title: String
   let author: String
-  let baseURL: URL /// the base path of your website, for example https://www.loopwerk.io
-  let pagesPath: String /// the relative path of your list of pages, for example articles/
+  let baseURL: URL /// the base URL of your website, for example https://www.loopwerk.io
+  let pagePath: String /// the relative path of your page of items, for example articles/
   let feedPath: String /// the relative path where this feed will be hosted, for example articles/feed.xml
-  let pages: [AnyPage]
-  let summary: ((AnyPage) -> String?)?
+  let items: [AnyItem]
+  let summary: ((AnyItem) -> String?)?
 
-  public init(title: String, author: String, baseURL: URL, pagesPath: String, feedPath: String, pages: [AnyPage], summary: ((AnyPage) -> String?)? = nil) {
+  public init(title: String, author: String, baseURL: URL, pagePath: String, feedPath: String, items: [AnyItem], summary: ((AnyItem) -> String?)? = nil) {
     self.title = title
     self.author = author
     self.baseURL = baseURL
-    self.pagesPath = pagesPath
+    self.pagePath = pagePath
     self.feedPath = feedPath
-    self.pages = pages
+    self.items = items
     self.summary = summary
   }
 
@@ -33,27 +33,27 @@ public struct AtomFeed {
         self.title
       }
       id {
-        baseURL.appendingPathComponent(pagesPath).absoluteString
+        baseURL.appendingPathComponent(pagePath).absoluteString
       }
       link(href: baseURL.appendingPathComponent(feedPath).absoluteString, rel: "self")
-      link(href: baseURL.appendingPathComponent(pagesPath).absoluteString)
+      link(href: baseURL.appendingPathComponent(pagePath).absoluteString)
       updated {
         Date()
       }
-      pages.map { page in
+      items.map { item in
         entry {
           title {
-            page.title.escapedXMLCharacters
+            item.title.escapedXMLCharacters
           }
           id {
-            baseURL.appendingPathComponent(page.url).absoluteString
+            baseURL.appendingPathComponent(item.url).absoluteString
           }
-          link(href: baseURL.appendingPathComponent(page.url).absoluteString, rel: "alternate")
+          link(href: baseURL.appendingPathComponent(item.url).absoluteString, rel: "alternate")
           updated {
-            page.date
+            item.date
           }
 
-          if let summaryString = self.summary?(page) {
+          if let summaryString = self.summary?(item) {
             summary {
               summaryString.escapedXMLCharacters
             }
@@ -61,7 +61,7 @@ public struct AtomFeed {
 
           content(type: "html") {
             Node.text("<![CDATA[")
-            page.body
+            item.body
             Node.text("]]>")
           }
         }
