@@ -11,7 +11,7 @@ TLDR;
 Package.swift
 
 ``` swift
-// swift-tools-version:5.3
+// swift-tools-version:5.2
 
 import PackageDescription
 
