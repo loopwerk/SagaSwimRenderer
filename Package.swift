@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.4
 
 import PackageDescription
 
@@ -13,8 +13,8 @@ let package = Package(
       targets: ["SagaSwimRenderer"]),
   ],
   dependencies: [
-    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.18.0"),
-    .package(name: "HTML", url: "https://github.com/robb/Swim", from: "0.1.1"),
+    .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "0.21.0"),
+    .package(name: "HTML", url: "https://github.com/robb/Swim", from: "0.2.0"),
   ],
   targets: [
     .target(
