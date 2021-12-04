@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/loopwerk/Saga.git",
         "state": {
           "branch": null,
-          "revision": "1114647c5f53ad7121f58c70c135c8539e64befe",
-          "version": "0.22.0"
+          "revision": "05557bf7385195fc04bc1ec8d6a5a556b972a660",
+          "version": "1.0.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/robb/Swim",
         "state": {
           "branch": null,
-          "revision": "58bf32d8dcac4649d7a4f68a13beb136d6a86dd6",
-          "version": "0.2.0"
+          "revision": "e9f4c9975cc834e712e6b39f7bf57ef8e9cd80cd",
+          "version": "0.3.0"
         }
       }
     ]
