@@ -17,17 +17,7 @@ func baseHtml(siteMetadata: SiteMetadata, title pageTitle: String, @NodeBuilder 
       div(id: "content") {
         children()
       }
-      script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-core.min.js")
-      script(src: "https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js")
     }
-  }
-}
-
-extension Date {
-  func formatted(_ format: String) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = format
-    return formatter.string(from: self)
   }
 }
 
