@@ -48,7 +48,7 @@ import SagaSwimRenderer
 @main
 struct Run {
   static func main() async throws {
-    try await Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
+    try await Saga(input: "content", output: "deploy")
       .register(
         metadata: EmptyMetadata.self,
         readers: [.parsleyMarkdownReader()],
