@@ -4,22 +4,15 @@ import PathKit
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
 
-// SiteMetadata is given to every template.
-// You can put whatever you want in here, as long as it's Decodable.
-struct SiteMetadata: Metadata {
-  let url: URL
-  let name: String
+enum SiteMetadata {
+  static let url = URL(string: "http://www.example.com")!
+  static let name = "Example website"
 }
-
-let siteMetadata = SiteMetadata(
-  url: URL(string: "http://www.example.com")!,
-  name: "Example website"
-)
 
 @main
 struct Run {
   static func main() async throws {
-    try await Saga(input: "content", output: "deploy", siteMetadata: siteMetadata)
+    try await Saga(input: "content", output: "deploy")
       // All the Markdown files will be parsed to html,
       // using the default EmptyMetadata as the Item's metadata type.
       .register(
