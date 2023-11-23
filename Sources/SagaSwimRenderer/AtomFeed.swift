@@ -2,21 +2,19 @@ import Foundation
 import HTML
 import Saga
 
-public struct AtomFeed {
+public struct AtomFeed<M: Metadata> {
   let dateFormatter = ISO8601DateFormatter()
   let title: String
   let author: String
   let baseURL: URL /// the base URL of your website, for example https://www.loopwerk.io
-  let pagePath: String /// the relative path of your page of items, for example articles/
   let feedPath: String /// the relative path where this feed will be hosted, for example articles/feed.xml
-  let items: [AnyItem]
-  let summary: ((AnyItem) -> String?)?
+  let items: [Item<M>]
+  let summary: ((Item<M>) -> String?)?
 
-  public init(title: String, author: String, baseURL: URL, pagePath: String, feedPath: String, items: [AnyItem], summary: ((AnyItem) -> String?)? = nil) {
+  public init(title: String, author: String, baseURL: URL, feedPath: String, items: [Item<M>], summary: ((Item<M>) -> String?)? = nil) {
     self.title = title
     self.author = author
     self.baseURL = baseURL
-    self.pagePath = pagePath
     self.feedPath = feedPath
     self.items = items
     self.summary = summary
@@ -33,17 +31,17 @@ public struct AtomFeed {
         self.title
       }
       id {
-        baseURL.appendingPathComponent(pagePath).absoluteString
+        baseURL.appendingPathComponent(feedPath).absoluteString
       }
       link(href: baseURL.appendingPathComponent(feedPath).absoluteString, rel: "self")
-      link(href: baseURL.appendingPathComponent(pagePath).absoluteString)
       updated {
         Date()
       }
+      generator()
       items.map { item in
         entry {
           title {
-            item.title.escapedXMLCharacters
+            item.title
           }
           id {
             baseURL.appendingPathComponent(item.url).absoluteString
@@ -55,14 +53,8 @@ public struct AtomFeed {
 
           if let summaryString = self.summary?(item) {
             summary {
-              summaryString.escapedXMLCharacters
+              summaryString
             }
-          }
-
-          content(type: "html") {
-            Node.text("<![CDATA[")
-            item.body
-            Node.text("]]>")
           }
         }
       }
@@ -85,6 +77,10 @@ public extension AtomFeed {
 
   func title(type: String = "text", children: () -> String) -> Node {
     .element("title", [ "type": type ], %children().asNode()%)
+  }
+
+  func generator() -> Node {
+    .element("generator", [ "uri": "https://github.com/loopwerk/Saga" ], "Saga")
   }
 
   func id(children: () -> String) -> Node {
