@@ -47,8 +47,11 @@ public struct AtomFeed<M: Metadata> {
             baseURL.appendingPathComponent(item.url).absoluteString
           }
           link(href: baseURL.appendingPathComponent(item.url).absoluteString, rel: "alternate")
-          updated {
+          published {
             item.date
+          }
+          updated {
+            item.lastModified
           }
 
           if let summaryString = self.summary?(item) {
@@ -87,6 +90,10 @@ public extension AtomFeed {
     .element("id", [:], %children().asNode()%)
   }
 
+  func published(date: () -> Date) -> Node {
+    .element("published", [:], %.text(dateFormatter.string(from: date()))%)
+  }
+  
   func updated(date: () -> Date) -> Node {
     .element("updated", [:], %.text(dateFormatter.string(from: date()))%)
   }
