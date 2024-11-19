@@ -48,7 +48,7 @@ public struct AtomFeed<M: Metadata> {
           }
           link(href: baseURL.appendingPathComponent(item.url).absoluteString, rel: "alternate")
           published {
-            item.date
+            item.published
           }
           updated {
             item.lastModified
