@@ -2,6 +2,7 @@ import Foundation
 import HTML
 import Saga
 
+@available(*, deprecated, message: "Please use Saga's built-in `atomFeed` function instead.")
 public struct AtomFeed<M: Metadata> {
   let dateFormatter = ISO8601DateFormatter()
   let title: String
@@ -48,7 +49,7 @@ public struct AtomFeed<M: Metadata> {
           }
           link(href: baseURL.appendingPathComponent(item.url).absoluteString, rel: "alternate")
           published {
-            item.published
+            item.date
           }
           updated {
             item.lastModified
@@ -65,7 +66,7 @@ public struct AtomFeed<M: Metadata> {
   }
 }
 
-public extension AtomFeed {
+internal extension AtomFeed {
   func feed(xmlns: String, @NodeBuilder children: () -> NodeConvertible) -> Node {
     .element("feed", [ "xmlns": xmlns ], children().asNode())
   }
