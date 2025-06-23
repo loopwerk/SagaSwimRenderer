@@ -1,6 +1,6 @@
 import Foundation
-import Saga
 import PathKit
+import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
 
@@ -20,13 +20,12 @@ struct Run {
         readers: [.parsleyMarkdownReader()],
         itemWriteMode: .keepAsFile,
         writers: [
-          .itemWriter(swim(renderPage))
+          .itemWriter(swim(renderPage)),
         ]
       )
 
       // Run the steps we registered above
       .run()
-
       // All the remaining files that were not parsed to markdown, so for example images, raw html files and css,
       // are copied as-is to the output folder.
       .staticFiles()

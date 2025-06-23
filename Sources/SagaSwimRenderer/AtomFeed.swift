@@ -66,9 +66,9 @@ public struct AtomFeed<M: Metadata> {
   }
 }
 
-internal extension AtomFeed {
+extension AtomFeed {
   func feed(xmlns: String, @NodeBuilder children: () -> NodeConvertible) -> Node {
-    .element("feed", [ "xmlns": xmlns ], children().asNode())
+    .element("feed", ["xmlns": xmlns], children().asNode())
   }
 
   func author(@NodeBuilder children: () -> NodeConvertible) -> Node {
@@ -80,11 +80,11 @@ internal extension AtomFeed {
   }
 
   func title(type: String = "text", children: () -> String) -> Node {
-    .element("title", [ "type": type ], %children().asNode()%)
+    .element("title", ["type": type], %children().asNode()%)
   }
 
   func generator() -> Node {
-    .element("generator", [ "uri": "https://github.com/loopwerk/Saga" ], "Saga")
+    .element("generator", ["uri": "https://github.com/loopwerk/Saga"], "Saga")
   }
 
   func id(children: () -> String) -> Node {
@@ -94,7 +94,7 @@ internal extension AtomFeed {
   func published(date: () -> Date) -> Node {
     .element("published", [:], %.text(dateFormatter.string(from: date()))%)
   }
-  
+
   func updated(date: () -> Date) -> Node {
     .element("updated", [:], %.text(dateFormatter.string(from: date()))%)
   }
@@ -104,18 +104,18 @@ internal extension AtomFeed {
   }
 
   func link(href: String) -> Node {
-    .element("link", [ "href": href ], [])
+    .element("link", ["href": href], [])
   }
 
   func link(href: String, rel: String) -> Node {
-    .element("link", [ "href": href, "rel": rel ], [])
+    .element("link", ["href": href, "rel": rel], [])
   }
 
   func summary(type: String = "text", children: () -> String) -> Node {
-    .element("summary", [ "type": type ], children().asNode())
+    .element("summary", ["type": type], children().asNode())
   }
 
   func content(type: String = "text", @NodeBuilder children: () -> NodeConvertible) -> Node {
-    .element("content", [ "type": type ], children().asNode())
+    .element("content", ["type": type], children().asNode())
   }
 }

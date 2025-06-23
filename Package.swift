@@ -5,12 +5,13 @@ import PackageDescription
 let package = Package(
   name: "SagaSwimRenderer",
   platforms: [
-    .macOS(.v12)
+    .macOS(.v12),
   ],
   products: [
     .library(
       name: "SagaSwimRenderer",
-      targets: ["SagaSwimRenderer"]),
+      targets: ["SagaSwimRenderer"]
+    ),
   ],
   dependencies: [
     .package(name: "Saga", url: "https://github.com/loopwerk/Saga.git", from: "2.0.0"),
@@ -22,9 +23,11 @@ let package = Package(
       dependencies: [
         "Saga",
         "HTML",
-      ]),
+      ]
+    ),
     .testTarget(
       name: "SagaSwimRendererTests",
-      dependencies: ["SagaSwimRenderer"]),
+      dependencies: ["SagaSwimRenderer"]
+    ),
   ]
 )
