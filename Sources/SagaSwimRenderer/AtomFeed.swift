@@ -66,6 +66,7 @@ public struct AtomFeed<M: Metadata> {
   }
 }
 
+@available(*, deprecated)
 extension AtomFeed {
   func feed(xmlns: String, @NodeBuilder children: () -> NodeConvertible) -> Node {
     .element("feed", ["xmlns": xmlns], children().asNode())
