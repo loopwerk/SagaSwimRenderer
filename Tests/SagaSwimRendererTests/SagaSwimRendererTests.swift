@@ -18,7 +18,7 @@ final class SagaSwimRendererTests: XCTestCase {
   }
 
   func testSwimRenderer() {
-    let templateFunction: (String) -> NodeConvertible = { context in
+    let templateFunction: @Sendable (String) -> NodeConvertible = { context in
       div {
         h1 { "Hello, \(context)!" }
         p { "This is a test." }
@@ -33,7 +33,7 @@ final class SagaSwimRendererTests: XCTestCase {
   }
 
   func testSwimRendererWithComplexHTML() {
-    let templateFunction: (String) -> NodeConvertible = { pageTitle in
+    let templateFunction: @Sendable (String) -> NodeConvertible = { pageTitle in
       html {
         head {
           title { pageTitle }
@@ -67,6 +67,7 @@ final class SagaSwimRendererTests: XCTestCase {
       title: "Test Article",
       body: "<p>Test content</p>",
       date: Date(),
+      created: Date(),
       lastModified: Date(),
       metadata: EmptyMetadata()
     )
@@ -75,10 +76,12 @@ final class SagaSwimRendererTests: XCTestCase {
       item: item,
       items: [item],
       allItems: [],
-      resources: []
+      resources: [],
+      previous: nil,
+      next: nil,
     )
 
-    let templateFunction: (ItemRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
+    let templateFunction: @Sendable (ItemRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
       article {
         h1 { context.item.title }
         div(class: "content") {
@@ -104,6 +107,7 @@ final class SagaSwimRendererTests: XCTestCase {
         title: "Test Article",
         body: "<p>Test content</p>",
         date: Date(),
+        created: Date(),
         lastModified: Date(),
         metadata: EmptyMetadata()
       ),
@@ -114,6 +118,7 @@ final class SagaSwimRendererTests: XCTestCase {
         title: "Another Article",
         body: "<p>More content</p>",
         date: Date(),
+        created: Date(),
         lastModified: Date(),
         metadata: EmptyMetadata()
       ),
@@ -126,7 +131,7 @@ final class SagaSwimRendererTests: XCTestCase {
       outputPath: "output"
     )
 
-    let templateFunction: (ItemsRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
+    let templateFunction: @Sendable (ItemsRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
       ul {
         context.items.map { item in
           li {
