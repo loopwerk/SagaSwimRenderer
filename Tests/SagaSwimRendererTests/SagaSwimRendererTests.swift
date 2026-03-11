@@ -1,7 +1,7 @@
 import Foundation
 import HTML
-import PathKit
 @testable import Saga
+import SagaPathKit
 @testable import SagaSwimRenderer
 import XCTest
 
@@ -78,7 +78,7 @@ final class SagaSwimRendererTests: XCTestCase {
       allItems: [],
       resources: [],
       previous: nil,
-      next: nil,
+      next: nil
     )
 
     let templateFunction: @Sendable (ItemRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
@@ -162,7 +162,7 @@ final class SagaSwimRendererTests: XCTestCase {
     XCTAssertEqual(normalized, "<div class=\"test\"><p>Hello World</p></div>")
   }
 
-  static var allTests = [
+  static let allTests = [
     ("testSwimRenderer", testSwimRenderer),
     ("testSwimRendererWithComplexHTML", testSwimRendererWithComplexHTML),
     ("testSwimRendererWithItemContext", testSwimRendererWithItemContext),
