@@ -161,12 +161,4 @@ final class SagaSwimRendererTests: XCTestCase {
 
     XCTAssertEqual(normalized, "<div class=\"test\"><p>Hello World</p></div>")
   }
-
-  static let allTests = [
-    ("testSwimRenderer", testSwimRenderer),
-    ("testSwimRendererWithComplexHTML", testSwimRendererWithComplexHTML),
-    ("testSwimRendererWithItemContext", testSwimRendererWithItemContext),
-    ("testSwimRendererWithListContext", testSwimRendererWithListContext),
-    ("testNodeToStringExtension", testNodeToStringExtension),
-  ]
 }

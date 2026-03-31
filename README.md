@@ -11,25 +11,23 @@ TLDR;
 Package.swift
 
 ``` swift
-// swift-tools-version:5.5
+// swift-tools-version:6.0
 
 import PackageDescription
 
 let package = Package(
   name: "Example",
   platforms: [
-    .macOS(.v12)
+    .macOS(.v14)
   ],
   dependencies: [
-    .package(url: "https://github.com/loopwerk/Saga", from: "1.0.0"),
-    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "0.5.0"),
-    .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "0.6.0")
+    .package(url: "https://github.com/loopwerk/SagaParsleyMarkdownReader", from: "1.0.0"),
+    .package(url: "https://github.com/loopwerk/SagaSwimRenderer", from: "1.0.0")
   ],
   targets: [
     .target(
       name: "Example",
       dependencies: [
-        "Saga",
         "SagaParsleyMarkdownReader",
         "SagaSwimRenderer"
       ]
@@ -45,28 +43,17 @@ import Saga
 import SagaParsleyMarkdownReader
 import SagaSwimRenderer
 
-@main
-struct Run {
-  static func main() async throws {
-    try await Saga(input: "content", output: "deploy")
-      .register(
-        metadata: EmptyMetadata.self,
-        readers: [.parsleyMarkdownReader()],
-        itemWriteMode: .keepAsFile,
-        writers: [
-          .itemWriter(swim(renderItem))
-        ]
-      )
+try await Saga(input: "content", output: "deploy")
+  .register(
+    metadata: EmptyMetadata.self,
+    readers: [.parsleyMarkdownReader()],
+    writers: [
+      .itemWriter(swim(renderItem))
+    ]
+  )
 
-      // Run the steps we registered above
-      .run()
-
-      // All the remaining files that were not parsed to markdown, so for example images, raw html files and css,
-      // are copied as-is to the output folder.
-      .staticFiles()
-  }
-}
-
+  // Run the steps we registered above
+  .run()
 ```
 
 And your `renderItem` template:
