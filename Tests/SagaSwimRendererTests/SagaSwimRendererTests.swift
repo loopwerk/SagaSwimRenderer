@@ -76,9 +76,11 @@ final class SagaSwimRendererTests: XCTestCase {
       item: item,
       items: [item],
       allItems: [],
-      resources: [],
       previous: nil,
-      next: nil
+      next: nil,
+      subfolder: nil,
+      locale: nil,
+      translations: [:]
     )
 
     let templateFunction: @Sendable (ItemRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
@@ -128,7 +130,10 @@ final class SagaSwimRendererTests: XCTestCase {
       items: items,
       allItems: [],
       paginator: nil,
-      outputPath: "output"
+      outputPath: "output",
+      subfolder: nil,
+      locale: nil,
+      translations: [:]
     )
 
     let templateFunction: @Sendable (ItemsRenderingContext<EmptyMetadata>) -> NodeConvertible = { context in
